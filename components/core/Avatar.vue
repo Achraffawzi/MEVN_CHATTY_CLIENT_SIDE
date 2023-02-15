@@ -1,41 +1,36 @@
 <template>
-  <div class="avatar">
-    <img :src="src" :alt="alt">
+  <div class="rounded-full overflow-hidden" :style="getCSSSize">
+    <img
+      class="w-full h-full object-cover rounded-full"
+      :src="src"
+      :alt="alt"
+    />
   </div>
 </template>
 
-<script>
-  export default {
-  name: "Avatar",
-  props: {
-    src: {
-      type: String,
-      required: true,
-    },
-    alt: {
-      type: String,
-      default: "Avatar",
-    },
-    size: {
-      type: String,
-      default: "40px" // small = 40 | medium = 50 | large = 55
-    }
-  }
-  }
+<script setup>
+import { computed, onMounted } from "vue";
+const { src, alt, size } = defineProps({
+  src: {
+    type: String,
+    required: true,
+  },
+  alt: {
+    type: String,
+    default: "Avatar",
+  },
+  size: {
+    type: Number,
+    default: 40, // small = 40 | medium = 50 | large = 55
+  },
+});
+
+onMounted(() => console.log(size));
+
+const getCSSSize = computed(() => {
+  return {
+    width: `${size}px`,
+    height: `${size}px`,
+  };
+});
 </script>
-
-<style lang="scss" scoped>
-.avatar {
-  border-radius: 50%;
-  overflow: hidden;
-  width: v-bind(size);
-  height: v-bind(size);
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-  }
-}
-</style>

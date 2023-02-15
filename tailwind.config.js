@@ -17,7 +17,7 @@ module.exports = {
         },
         primary: "#1E90FF",
         danger: "rgba(255, 0, 0, 0.5)",
-        borderColor: "#2a2626",
+        borderColor: "rgba(255, 255, 255, 0.1)",
         inputBg: "#3E3C3E",
         textGray: "rgba(255, 255, 255, 0.43)",
       },
