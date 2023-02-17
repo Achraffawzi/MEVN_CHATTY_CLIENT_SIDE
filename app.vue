@@ -3,6 +3,8 @@
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
+
+    <div id="popup-target"></div>
   </div>
 
   <div
