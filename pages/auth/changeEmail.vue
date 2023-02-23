@@ -64,10 +64,9 @@ const onSubmit = async (e) => {
 
   // Make API request
   try {
-    await $api.put(
-      `${runTimeConfig.public.API_URL}/auth/change-email/${query.id}`,
-      { email: email.value }
-    );
+    await $api.put(`${runTimeConfig.public.API_URL}/auth/change-email`, {
+      email: email.value,
+    });
 
     isLoading.value = false;
     await navigateTo("/auth/login");

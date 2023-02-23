@@ -5,6 +5,9 @@ export default defineNuxtConfig({
       API_URL: process.env.API_URL,
     },
   },
+  axios: {
+    timeout: 100000, // Set a 30s timeout
+  },
   css: [
     "@/assets/css/main.css",
     "@fortawesome/fontawesome-svg-core/styles.css",

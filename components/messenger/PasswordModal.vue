@@ -51,6 +51,8 @@
 </template>
 
 <script setup>
+import { runtime } from "webpack";
+
 const { $objHasAllValuesExcept, $api } = useNuxtApp();
 const runTimeConfig = useRuntimeConfig();
 const emit = defineEmits(["closePasswordModal"]);
@@ -76,7 +78,7 @@ const closePasswordModal = () => {
   emit("closePasswordModal");
 };
 
-const onSubmit = () => {
+const onSubmit = async () => {
   isLoading.value = true;
 
   const isValid = $objHasAllValuesExcept(passwords.value);
@@ -90,6 +92,34 @@ const onSubmit = () => {
   }
 
   // Make API request
+  try {
+    const { data } = await $api.put(
+      `${runTimeConfig.public.API_URL}/auth/change-password`,
+      {
+        ...passwords.value,
+      }
+    );
+
+    isLoading.value = false;
+
+    alert.value = {
+      message: data.message,
+      type: "success",
+    };
+
+    setTimeout(async () => {
+      await $api.delete(`${runTimeConfig.public.API_URL}/auth/logout`);
+      await navigateTo("/auth/login");
+    }, 4000);
+  } catch (error) {
+    if (error.response) {
+      alert.value = {
+        message: error.response.data.message,
+        type: "error",
+      };
+    }
+    isLoading.value = false;
+  }
 };
 
 const inputChanged = (event) => {

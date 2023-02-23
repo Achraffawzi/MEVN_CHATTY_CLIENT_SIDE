@@ -69,5 +69,3 @@ const closePasswordModal = () => {
   isPasswordModalOpen.value = false;
 };
 </script>
-
-<style lang="scss" scoped></style>

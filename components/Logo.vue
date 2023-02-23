@@ -7,14 +7,10 @@
 const { variant, size } = defineProps({
   variant: {
     type: String,
-    required: true
+    required: true,
   },
   size: {
     type: Object,
-  }
-})
+  },
+});
 </script>
-
-<style scoped>
-
-</style>

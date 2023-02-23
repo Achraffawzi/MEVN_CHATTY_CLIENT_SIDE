@@ -6,12 +6,12 @@
 </template>
 
 <script>
-  export default {
-  name: "SearchInput"
-  }
+export default {
+  name: "SearchInput",
+};
 </script>
 
-<style lang="scss" scoped>
+<!-- <style lang="scss" scoped>
 .searchInputWrapper {
   background-color: $input-grey-bg;
   padding: 0px 5px;
@@ -35,4 +35,4 @@
     color: $white;
   }
 }
-</style>
+</style> -->
