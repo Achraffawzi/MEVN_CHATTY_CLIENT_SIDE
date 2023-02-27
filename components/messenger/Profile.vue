@@ -29,7 +29,7 @@
         <h2 @click="openPasswordModal" class="text-textGray cursor-pointer">
           Change Password
         </h2>
-        <h2 class="text-red-600 cursor-pointer">Logout</h2>
+        <h2 class="text-red-600 cursor-pointer" @click="onLogout">Logout</h2>
       </div>
     </div>
   </div>
@@ -42,6 +42,9 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
+const { $api } = useNuxtApp();
+const runTimeConfig = useRuntimeConfig();
 const { user } = defineProps({
   user: {
     type: Object,
@@ -53,6 +56,9 @@ const { user } = defineProps({
   },
 });
 const emit = defineEmits(["closeProfile", "openModal"]);
+
+// data
+const alert = ref(null);
 
 // Profile
 const profileWrapper = ref(null);
@@ -67,5 +73,16 @@ const openPasswordModal = () => {
 };
 const closePasswordModal = () => {
   isPasswordModalOpen.value = false;
+};
+
+// auth
+const onLogout = async () => {
+  const { data } = await $api.delete(
+    `${runTimeConfig.public.API_URL}/auth/logout`
+  );
+  alert.value = {
+    message: data.message,
+    type: "success",
+  };
 };
 </script>

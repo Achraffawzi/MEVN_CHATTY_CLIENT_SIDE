@@ -56,13 +56,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 const { $objHasAllValuesExcept, $api } = useNuxtApp();
 const runTimeConfig = useRuntimeConfig();
-
-onMounted(() => {
-  console.log("app mounted");
-});
 
 const user = ref({
   email: "",
@@ -75,42 +71,43 @@ const loaderSize = ref({
   eight: 20,
 });
 
-const onSubmit = () => {
-  console.log("onsubmit fired!!!");
-  // try {
-  //   isLoading.value = true;
-  //   const isValid = $objHasAllValuesExcept(user.value);
+const onSubmit = async () => {
+  try {
+    isLoading.value = true;
+    const isValid = $objHasAllValuesExcept(user.value);
 
-  //   if (!isValid) {
-  //     alert.value = {
-  //       message: "Please fill all the required info",
-  //       type: "error",
-  //     };
-  //     return;
-  //   }
+    if (!isValid) {
+      alert.value = {
+        message: "Please fill all the required info",
+        type: "error",
+      };
+      return;
+    }
 
-  //   // Make API request
-  //   await $api.post(
-  //     `${runTimeConfig.public.API_URL}/auth/login`,
-  //     { ...user.value },
-  //     {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     }
-  //   );
-  //   isLoading.value = false;
-  //   await navigateTo("/");
-  // } catch (error) {
-  //   console.log(error);
-  //   if (error.response) {
-  //     alert.value = {
-  //       message: error.response.data.message,
-  //       type: "error",
-  //     };
-  //   }
-  //   isLoading.value = false;
-  // }
+    // Make API request
+    await $api.post(
+      `${runTimeConfig.public.API_URL}/auth/login`,
+      { ...user.value },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    // save isAuth state in pinia store
+    isLoading.value = false;
+    await navigateTo("/");
+  } catch (error) {
+    console.log(error);
+    if (error.response) {
+      alert.value = {
+        message: error.response.data.message,
+        type: "error",
+      };
+    }
+    isLoading.value = false;
+  }
 };
 
 const inputChanged = (event) => {

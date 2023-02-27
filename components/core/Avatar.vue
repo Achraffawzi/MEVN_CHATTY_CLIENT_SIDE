@@ -25,8 +25,6 @@ const { src, alt, size } = defineProps({
   },
 });
 
-onMounted(() => console.log(size));
-
 const getCSSSize = computed(() => {
   return {
     width: `${size}px`,

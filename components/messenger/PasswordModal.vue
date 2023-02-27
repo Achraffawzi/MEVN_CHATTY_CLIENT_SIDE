@@ -51,8 +51,6 @@
 </template>
 
 <script setup>
-import { runtime } from "webpack";
-
 const { $objHasAllValuesExcept, $api } = useNuxtApp();
 const runTimeConfig = useRuntimeConfig();
 const emit = defineEmits(["closePasswordModal"]);

@@ -27,11 +27,22 @@
 
 <script setup>
 import { ref } from "vue";
-const user = ref({
-  username: "itsYeAlpha",
-  email: "achrafawzi2000@gmail.com",
-  picture:
-    "https://ichef.bbci.co.uk/news/976/cpsprodpb/64A3/production/_128436752_gettyimages-1459166551.jpg",
-});
+import { storeToRefs } from "pinia";
+import { useUserStore } from "../store/user";
+// definePageMeta({
+//   middleware: "auth",
+// });
+const userStore = useUserStore();
+const user = userStore.user;
+const setUser = userStore.setUser;
+
+console.log(
+  setUser({
+    username: "new username",
+    email: "new@gmail.com",
+    picture: "new@gmail.com.jpg",
+  })
+);
+
 const isProfileOpen = ref(false);
 </script>
