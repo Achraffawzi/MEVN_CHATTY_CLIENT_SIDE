@@ -1,5 +1,10 @@
 export default defineNuxtConfig({
-  modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt"],
+  modules: [
+    "@nuxtjs/tailwindcss",
+    "@pinia/nuxt",
+    "@vueuse/nuxt",
+    "@pinia-plugin-persistedstate/nuxt",
+  ],
   runtimeConfig: {
     public: {
       API_URL: process.env.API_URL,

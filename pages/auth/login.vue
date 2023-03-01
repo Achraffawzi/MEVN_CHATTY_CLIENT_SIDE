@@ -57,8 +57,11 @@
 
 <script setup>
 import { ref } from "vue";
+import { useUserStore } from "~~/store/user";
 const { $objHasAllValuesExcept, $api } = useNuxtApp();
 const runTimeConfig = useRuntimeConfig();
+const store = useUserStore();
+const userFromStore = store.user;
 
 const user = ref({
   email: "",
@@ -85,7 +88,7 @@ const onSubmit = async () => {
     }
 
     // Make API request
-    await $api.post(
+    const { data } = await $api.post(
       `${runTimeConfig.public.API_URL}/auth/login`,
       { ...user.value },
       {
@@ -95,7 +98,11 @@ const onSubmit = async () => {
       }
     );
 
-    // save isAuth state in pinia store
+    // save user state to pinia store
+    store.setUser(data);
+    console.log(userFromStore);
+    console.log(localStorage.getItem("user"));
+
     isLoading.value = false;
     await navigateTo("/");
   } catch (error) {
@@ -112,7 +119,6 @@ const onSubmit = async () => {
 
 const inputChanged = (event) => {
   user.value = { ...user.value, [event.name]: event.value };
-  console.log(user.value);
 };
 
 const closeAlert = (e) => {

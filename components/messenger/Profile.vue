@@ -17,7 +17,11 @@
     >
       <div class="flex-1">
         <div class="flex justify-center items-center mb-3">
-          <Avatar :src="user.picture" :alt="user.username" :size="100" />
+          <Avatar
+            :src="user.picture.pictureURL"
+            :alt="user.username"
+            :size="100"
+          />
         </div>
         <div>
           <h1 class="text-textGray">{{ user.username }}</h1>

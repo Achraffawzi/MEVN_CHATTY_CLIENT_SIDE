@@ -3,7 +3,11 @@
     <div class="bg-dark-100 basis-1/4 border-r border-r-borderColor p-2 pb-0">
       <!-- Sidebar Header => Profile username -->
       <div class="flex items-center border-b border-b-borderColor pb-2">
-        <Avatar :src="user.picture" :alt="user.username" :size="40" />
+        <Avatar
+          :src="user.picture.pictureURL"
+          :alt="user.username"
+          :size="40"
+        />
         <div class="flex-1 flex flex-col justify-center items-start ml-2">
           <span class="text-white text-lg">{{ user.username }}</span>
           <span
@@ -26,23 +30,16 @@
 </template>
 
 <script setup>
+// console.log(user);
 import { ref } from "vue";
-import { storeToRefs } from "pinia";
+// import { storeToRefs } from "pinia";
 import { useUserStore } from "../store/user";
 // definePageMeta({
 //   middleware: "auth",
 // });
 const userStore = useUserStore();
 const user = userStore.user;
-const setUser = userStore.setUser;
-
-console.log(
-  setUser({
-    username: "new username",
-    email: "new@gmail.com",
-    picture: "new@gmail.com.jpg",
-  })
-);
+console.log(user);
 
 const isProfileOpen = ref(false);
 </script>
