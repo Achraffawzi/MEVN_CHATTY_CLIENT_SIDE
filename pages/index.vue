@@ -17,6 +17,9 @@
           >
         </div>
       </div>
+
+      <!-- Search component -->
+      <SearchInput />
     </div>
     <div class="bg-dark-200 flex-1">
       <Profile
@@ -30,16 +33,13 @@
 </template>
 
 <script setup>
-// console.log(user);
 import { ref } from "vue";
-// import { storeToRefs } from "pinia";
 import { useUserStore } from "../store/user";
 // definePageMeta({
 //   middleware: "auth",
 // });
 const userStore = useUserStore();
 const user = userStore.user;
-console.log(user);
 
 const isProfileOpen = ref(false);
 </script>

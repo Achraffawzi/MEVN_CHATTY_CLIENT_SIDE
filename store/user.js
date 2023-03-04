@@ -5,10 +5,7 @@ import { useStorage } from "@vueuse/core";
 export const useUserStore = defineStore("userStore", {
   state: () => ({
     // user: useStorage("user", null),
-    user:
-      localStorage.getItem("userStore") !== null
-        ? JSON.parse(localStorage.getItem("userStore"))
-        : nulln,
+    user: useStorage("userStore", null),
   }),
 
   getters: {},
